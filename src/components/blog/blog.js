@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 
 import axios from 'axios';
 import BlogItem from './blogItem';
+import Notice from '../notification/notice';
 import React from 'react';
 
 
@@ -36,7 +37,7 @@ function Blog() {
                         <p className="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p>
                     </div>
                     {isLoading ? (
-                        <div>Loading</div>
+                        <Notice title={'Loading'}></Notice>
                     ) : data?.data && !isLoading && !isError ? (
                         data?.data?.length > 0 ? (
                             <div className="grid max-w-2xl grid-cols-1 mx-auto mt-16 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -46,14 +47,14 @@ function Blog() {
                             </div>
 
                         ) : (
-                            <div>Empty</div>
+                            <Notice title={'Empty'}></Notice>
                         )
                     ) : (
-                        <div>Error</div>
+                        <Notice title={'Error'} text="Something went wrong"></Notice>
                     )}
 
                     <div class="flex flex-1 justify-between sm:justify-end">
-                        <button onClick={() => setPage((p) => p > 0 ? p - 1 : 1)} class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</button>
+                        <button onClick={() => setPage((p) => p > 1 ? p - 1 : 1)} class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</button>
                         <button onClick={() => setPage((p) => p + 1)} class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</button>
                     </div>
                 </div>
