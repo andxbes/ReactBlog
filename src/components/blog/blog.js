@@ -8,7 +8,12 @@ import React from 'react';
 
 
 async function get_posts(page = 1) {
-    const { data } = await axios.get(process.env.REACT_APP_URL + `/api/blogs/?pagination[pageSize]=9&pagination[page]=${page}`, {
+
+    const url = new URL(process.env.REACT_APP_URL + '/api/blogs/?populate=Thumbnail');
+    url.searchParams.append('pagination[pageSize]', 9);
+    url.searchParams.append('pagination[page]', page);
+
+    const { data } = await axios.get(url, {
         headers: {
             'Authorization': 'bearer ' + process.env.REACT_APP_SECRET_TOKEN,
             // 'Accept': '*/*'
